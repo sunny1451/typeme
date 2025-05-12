@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Typing Speed Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .game-container {
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 2px solid #00ffe5;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 30px #00ffe588;
+      width: 90%;
+      max-width: 900px;
+      animation: zoomIn 0.6s ease-in-out;
+      position: relative;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .wallet {
+      text-align: right;
+      font-size: 18px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      color: #00ffe5;
+      transition: color 0.3s;
+    }
+
+    .wallet:hover {
+      color: #00bfa6;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ffe5;
+      text-shadow: 0 0 10px #00ffe5;
+      margin-bottom: 20px;
+    }
+
+    .paragraph-box {
+      background: #1c1c2e;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #00ffe599;
+      margin-bottom: 20px;
+      white-space: pre-wrap;
+      min-height: 100px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      background: #2f3640;
+      color: #00ffe5;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px #00ffe555 inset;
+    }
+
+    .status-box {
+      text-align: center;
+      font-size: 16px;
+      color: #00ffe5;
+      margin-bottom: 10px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .controls button, .start-btn {
+      background: #00ffe5;
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffe5;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .controls button:hover, .start-btn:hover {
+      transform: scale(1.05);
+      background-color: #00bfa6;
+    }
+
+    #feedback {
+      color: #ff6b6b;
+      font-weight: bold;
+    }
+
+    .game-container button {
+      margin-top: 20px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      color: #00ffe5;
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+    }
+    .menu-container {
+  position: relative;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Stylish Hamburger Button */
+.hamburger {
+  font-size: 26px;
+  cursor: pointer;
+  user-select: none;
+  background-color: #4a90e2;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.hamburger:hover {
+  background-color: #357abd;
+}
+
+/* Navigation Menu Box */
+.nav-links {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border: 1px solid #ddd;
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  top: 50px;
+  left: 0;
+  min-width: 180px;
+  animation: slideDown 0.3s ease;
+  z-index: 100;
+}
+
+/* Show menu */
+.nav-links.show {
+  display: flex;
+}
+
+/* Link style */
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  margin: 8px 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a:hover {
+  background-color: #4a90e2;
+  color: white;
+}
+
+/* Animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+  </style>
+
+  <div class="game-container">
+    <div class="wallet" id="wallet">💰 Wallet: <span id="points">0.00</span> pts</div>
+
+    <h1>Typing Speed Game</h1>
+
+    <!-- Navigation Menu -->
+    <div class="menu-container">
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <div class="nav-links" id="navLinks">
+        <a href="file:///C:/Users/sunny/OneDrive/Desktop/login%20users/kyc/website/wallet/home/home.html">🏠 Home</a>
+        <a href="file:///C:/Users/sunny/OneDrive/Desktop/login%20users/kyc/website/aboutus/about.html">📄 About Us</a>
+        <a href="file:///C:/Users/sunny/OneDrive/Desktop/login%20users/kyc/website/contact/contact.html">📬 Contact Us</a>
+        <a href="file:///C:/Users/sunny/OneDrive/Desktop/login%20users/kyc/website/privicy.html/privacy.html">🔐 Privacy Policy</a>
+      </div>
+    </div>
+
+    <div class="paragraph-box">
+      <p id="textDisplay"></p>
+    </div>
+    <textarea id="inputArea" placeholder="Start typing here..." rows="5"></textarea>
+    <div class="status-box">
+      <p>⚡ WPM: <span id="wpm">0</span></p>
+      <p id="feedback"></p>
+    </div>
+    <div class="controls">
+      <button id="prevBtn">⬅ Prev</button>
+      <button id="nextBtn">Next ➤</button>
+    </div>
+    <button class="start-btn" id="restartBtn">⟳ Restart Game</button>
+  </div>
+
+  <div class="footer">
+    <p>Crafted with ❤️ by YourTeam</p>
+  </div>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+  import { getFirestore, doc, setDoc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
+  import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA9Gr2Qq5s_2fuMcf1u3P5O1bluhlBA_dw",
+    authDomain: "data-entry-84206.firebaseapp.com",
+    projectId: "data-entry-84206",
+    storageBucket: "data-entry-84206.appspot.com",
+    messagingSenderId: "132128501188",
+    appId: "1:132128501188:web:ce9aef42a658be7aef4891",
+    measurementId: "G-4ZPJGQP6K1"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth();
+
+  const paragraphs = [
+    `Typing is a valuable skill.\nPractice daily to improve speed.\nFocus on accuracy first.`,
+    `Accuracy is more important than speed.\nSlow down if you make mistakes.\nCorrect typing builds muscle memory.`,
+    `Use all your fingers when typing.\nAvoid looking at the keyboard.\nKeep your eyes on the screen.`,
+    'Typing helps in coding.\nBe fast and error-free.\nPractice makes perfect.',
+    'A story of dreams, data,\nand a village boy\nwho changed Telangana forever.',
+    'In a small village on the banks of the Manair River near Siddipet,\nTelangana, lived a boy named Ajay.',
+    'His family were farmers,\nand most days began before sunrise,\nhelping his father water the crops or carry bundles of sugarcane to the market.',
+    'Ajay was bright, curious,\nand had a secret: he loved computers.\nThe nearest school with a working computer was 7 kilometers away.',
+    'Every evening after farming,\nAjay would walk there,\ndusty and tired,\njust to spend 30 minutes in the computer lab,\nlearning Python from an old,', 
+    'barely working desktop.\nHe wasn’t just learning how to code.\nHe was learning how to solve problems.One day,\nduring a school event in Hyderabad,',
+    'Ajay heard government officials from Telangana talk about their mission:\n“Digital Telangana”—taking education, internet,',
+    'and data services to every corner of the state.\nThat night, a crazy idea struck him.',
+    'What if he could build a simple app to help farmers track rainfall,\nsoil quality, and market prices—right from a basic mobile phone',
+    'For months, Ajay worked under a neem tree after school,\nusing online courses, free government Wi-Fi,\nand a borrowed smartphone.',
+    'He built an app he called “Rythu Link”.\nIt was basic—but brilliant.\nThe app helped farmers reduce middlemen, choose the best day to harvest,', 
+    'and even apply for Telangana’s Rythu Bandhu scheme digitally.\nWhen he showed it to his local teacher,\nshe was shocked.',
+    'She submitted the idea to the T-Hub innovation center in Hyderabad,\nand within weeks,\nAjay was called to pitch his idea to a panel of mentors.',
+    'Not only did he win support—his app was funded,\nscaled, and used by over 10,000 farmers across Telangana within a year.',
+    'Soon, Ajay was invited by the Telangana Education Department to speak in schools,\nencouraging rural kids to dream big.'
+  ];
+
+  let currentParagraph = 0;
+  let points = 0;
+  let startTime = null;
+  let finishedParagraphs = [];
+  let userEmail = null;
+
+  const textDisplay = document.getElementById("textDisplay");
+  const inputArea = document.getElementById("inputArea");
+  const wpmDisplay = document.getElementById("wpm");
+  const feedback = document.getElementById("feedback");
+  const pointsDisplay = document.getElementById("points");
+
+  function showParagraph() {
+    if (currentParagraph >= paragraphs.length) {
+      inputArea.disabled = true;
+      feedback.textContent = "🎉 All paragraphs finished!";
+      return;
+    }
+
+    while (finishedParagraphs.includes(currentParagraph) && currentParagraph < paragraphs.length - 1) {
+      currentParagraph++;
+    }
+
+    inputArea.value = "";
+    inputArea.disabled = false;
+    inputArea.focus();
+    textDisplay.textContent = paragraphs[currentParagraph];
+    feedback.textContent = "";
+    wpmDisplay.textContent = "0";
+    startTime = null;
+  }
+
+  function startGame() {
+    points = 0;
+    currentParagraph = 0;
+    finishedParagraphs = [];
+    pointsDisplay.textContent = points.toFixed(2);
+    showParagraph();
+  }
+
+  async function updateUserPointsAndProgress(email, earnedPoints, lastParagraphIndex) {
+    const userPointsRef = doc(db, "userPoints", email);
+    const docSnap = await getDoc(userPointsRef);
+    if (docSnap.exists()) {
+      const currentPoints = docSnap.data().points || 0;
+      await updateDoc(userPointsRef, {
+        points: currentPoints + earnedPoints,
+        lastParagraphIndex: lastParagraphIndex
+      });
+    } else {
+      await setDoc(userPointsRef, {
+        points: earnedPoints,
+        lastParagraphIndex: lastParagraphIndex
+      });
+    }
+  }
+
+  async function updateWallet(email, earnedPoints) {
+    const userDoc = doc(db, "wallets", email);
+    const docSnap = await getDoc(userDoc);
+    if (docSnap.exists()) {
+      const current = docSnap.data().points || 0;
+      await updateDoc(userDoc, {
+        points: current + earnedPoints
+      });
+    } else {
+      await setDoc(userDoc, {
+        points: earnedPoints
+      });
+    }
+  }
+
+  inputArea.addEventListener("input", async () => {
+    if (!startTime) startTime = new Date();
+    const typed = inputArea.value;
+    const target = paragraphs[currentParagraph];
+
+    if (target.startsWith(typed)) {
+      feedback.textContent = "";
+
+      if (typed === target) {
+        const endTime = new Date();
+        const timeTaken = (endTime - startTime) / 1000 / 60;
+        const words = target.split(" ").length;
+        const wpm = Math.round(words / timeTaken);
+        wpmDisplay.textContent = wpm;
+
+        points += 0.25;
+        pointsDisplay.textContent = points.toFixed(2);
+
+        if (userEmail) {
+          await updateWallet(userEmail, 0.25);
+          await updateUserPointsAndProgress(userEmail, 0.25, currentParagraph);
+        }
+
+        finishedParagraphs.push(currentParagraph);
+        inputArea.disabled = true;
+
+        textDisplay.classList.add("fade-out");
+        setTimeout(() => {
+          currentParagraph++;
+          textDisplay.classList.remove("fade-out");
+          showParagraph();
+        }, 1000);
+      }
+    } else {
+      const mistakeIndex = [...typed].findIndex((c, i) => c !== target[i]);
+      feedback.textContent = `❌ Mistake at ${mistakeIndex + 1}: "${typed[mistakeIndex]}" → "${target[mistakeIndex]}"`;
+      inputArea.value = "";
+      startTime = null;
+    }
+  });
+
+  const walletDisplay = document.getElementById("points");
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      userEmail = user.email;
+      const userPointsRef = doc(db, "userPoints", userEmail);
+      const docSnap = await getDoc(userPointsRef);
+      // Fetch from wallets instead of userPoints
+      const walletRef = doc(db, "wallets", userEmail);
+      const walletSnap = await getDoc(walletRef);
+      walletDisplay.textContent = walletSnap.exists() ? (walletSnap.data().points || 0).toFixed(2) : "0.00";
+
+// Also update the local game score based on progress (userPoints)
+      const progressSnap = await getDoc(doc(db, "userPoints", userEmail));
+      if (progressSnap.exists()) {
+      currentParagraph = progressSnap.data().lastParagraphIndex || 0;
+      }
+      showParagraph();
+      // ✅ Start the game AFTER auth confirmed
+      startGame();
+    } else {
+      alert("Please log in to access your wallet.");
+      window.location.href = "file:///C:/Users/sunny/OneDrive/Desktop/login%20users/kyc/website/login/login.html";
+    }
+  });
+
+  document.getElementById("restartBtn").addEventListener("click", startGame);
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    currentParagraph++;
+    showParagraph();
+  });
+  document.getElementById("prevBtn").addEventListener("click", () => {
+    if (currentParagraph > 0) currentParagraph--;
+    showParagraph();
+  });
+
+  document.getElementById("wallet").addEventListener("click", () => {
+    localStorage.setItem('gameState', JSON.stringify({ currentParagraph, points }));
+    window.location.href = "file:///C:/Users/sunny/OneDrive/Desktop/login%20users/kyc/website/wallet/wallet.html";
+  });
+
+  window.toggleMenu = function () {
+    document.getElementById("navLinks").classList.toggle("show");
+  };
+</script>
+
+
+</script>
+</body>
+</html>

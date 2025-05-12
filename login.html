@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> Login / Register</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #00ffe5;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      width: 300%;
+      height: 300%;
+      background: radial-gradient(circle, rgba(0,255,229,0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      animation: moveBackground 60s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes moveBackground {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50%, -50%); }
+    }
+
+    .form-container {
+      position: relative;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,255,229,0.4), 0 0 10px rgba(0,255,229,0.2);
+      backdrop-filter: blur(12px);
+      width: 340px;
+      animation: zoomIn 0.6s ease;
+      z-index: 1;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #00ffe5;
+      text-shadow: 0 0 10px #00ffe5;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 12px 0;
+      background: #111922;
+      border: 1.5px solid #00ffe5;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #00ffe5;
+      font-family: 'Orbitron', sans-serif;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus {
+      border-color: #00fff2;
+      box-shadow: 0 0 6px #00ffe5;
+    }
+
+    input::placeholder {
+      color: #00ffe5aa;
+      font-size: 13px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #00ffe5, #00bfa6);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px #00ffe5;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #00d9c2, #00b19d);
+      transform: scale(1.03);
+    }
+
+    .toggle {
+      text-align: center;
+      margin-top: 18px;
+      color: #00ffe5;
+      cursor: pointer;
+      font-size: 14px;
+      text-shadow: 0 0 5px rgba(0,255,229,0.3);
+    }
+
+    .toggle:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2 id="formTitle">Login</h2>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="submitBtn" onclick="handleAuth()">Login</button>
+    <div class="toggle" onclick="toggleForm()">Don't have an account? Register</div>
+  </div>
+
+  <script type="module">
+  // Firebase SDK imports
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+  // Your Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyA9Gr2Qq5s_2fuMcf1u3P5O1bluhlBA_dw",
+    authDomain: "data-entry-84206.firebaseapp.com",
+    projectId: "data-entry-84206",
+    storageBucket: "data-entry-84206.appspot.com",
+    messagingSenderId: "132128501188",
+    appId: "1:132128501188:web:ce9aef42a658be7aef4891",
+    measurementId: "G-4ZPJGQP6K1"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  let isLogin = true;
+
+  window.toggleForm = function () {
+    isLogin = !isLogin;
+    document.getElementById("formTitle").textContent = isLogin ? "Login" : "Register";
+    document.getElementById("submitBtn").textContent = isLogin ? "Login" : "Register";
+    document.querySelector(".toggle").textContent = isLogin
+      ? "Don't have an account? Register"
+      : "Already have an account? Login";
+  };
+
+  window.handleAuth = async function () {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!email || !password) {
+      alert("Please fill in both fields.");
+      return;
+    }
+
+    if (isLogin) {
+      // Login
+      signInWithEmailAndPassword(auth, email, password)
+        .then(async () => {
+          alert("Login successful!");
+          const userEmail = auth.currentUser.email;
+
+          // Create document with email as ID and initial points
+          await setDoc(doc(db, "userPoints", userEmail), {
+            points: 0
+          }, { merge: true });
+
+          window.location.href = "file:///C:/Users/sunny/OneDrive/Desktop/login%20users/kyc/website/new.html";
+        })
+        .catch(error => {
+          alert("Login failed: " + error.message);
+        });
+    } else {
+      // Register
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          alert("Registration successful!");
+          toggleForm(); // Switch back to login
+        })
+        .catch(error => {
+          alert("Registration failed: " + error.message);
+        });
+    }
+  };
+</script>
+
+</body>
+</html>

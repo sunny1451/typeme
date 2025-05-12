@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Typing Me Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    .game-container {
+      background-color: rgba(0, 0, 0, 0.75);
+      border: 2px solid #00ffe5;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 30px #00ffe599;
+      max-width: 1000px;
+      margin: auto;
+      animation: zoomIn 0.6s ease-in-out;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1, h2 {
+      color: #00ffe5;
+      text-align: center;
+      text-shadow: 0 0 10px #00ffe5;
+    }
+
+    p, li {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .paragraph-box {
+      background: #1c1c2e;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #00ffe599;
+      margin-bottom: 20px;
+    }
+
+    .faq-section {
+      margin-top: 30px;
+    }
+
+    .faq-question {
+      cursor: pointer;
+      background: #2c3e50;
+      border: 1px solid #00ffe5;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .faq-answer {
+      display: none;
+      background: #1c1c2e;
+      padding: 15px;
+      margin-top: -10px;
+      border-radius: 0 0 10px 10px;
+      border-top: none;
+    }
+
+    .youtube-video {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .youtube-video iframe {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffe599;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>About Typing Me Game</h1>
+
+    <div class="paragraph-box">
+      <p><strong>Typing Me</strong> is a futuristic speed typing game that combines skill, precision, and a little bit of pressure! Designed to help you become faster and more accurate with the keyboard, this game is perfect for students, gamers, professionals, and anyone who wants to master the art of typing.</p>
+
+      <p>The game features glowing neon visuals, real-time feedback, and a points-based system that motivates you to keep improving. You’ll face three-line challenges, get instant WPM (Words Per Minute) and accuracy scores, and build up your wallet with every win.</p>
+    </div>
+
+    <h2>Why Play Typing Me?</h2>
+    <div class="paragraph-box">
+      <ul>
+        <li>⚡ Improve typing speed and accuracy in a game-style environment.</li>
+        <li>🎮 Compete with friends and climb the leaderboard.</li>
+        <li>🏆 Earn points and unlock upcoming rewards and bonuses.</li>
+        <li>🧠 Train your brain and boost muscle memory for keyboards.</li>
+        <li>💡 Perfect for beginners, students, office workers, and coders.</li>
+      </ul>
+    </div>
+
+    <h2>How to Play</h2>
+    <div class="paragraph-box">
+      <ol>
+        <li>Start the game from the home screen.</li>
+        <li>A 3-line paragraph will appear. Type it **exactly**.</li>
+        <li>If you make a mistake, the paragraph resets. Accuracy is key!</li>
+        <li>Each correct completion gives you <strong>0.25 points</strong>.</li>
+        <li>Your WPM, accuracy, and points wallet are shown live.</li>
+      </ol>
+    </div>
+
+    <h2>The Science Behind Typing Me</h2>
+    <div class="paragraph-box">
+      <p>Typing Me is built on principles of <strong>neuroplasticity</strong>, repetition learning, and reaction training. By introducing short but demanding typing bursts, it encourages your brain to form faster neural pathways between your eyes, brain, and fingers.</p>
+
+      <p>Unlike basic typing tests, this game penalizes errors, trains your memory by restarting on mistakes, and gives you instant metrics — making it a real-time learning engine disguised as a game.</p>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-section">
+      <div class="faq-question" onclick="toggleFaq(0)">Is Typing Me Game free?</div>
+      <div class="faq-answer">Yes! Typing Me is completely free to play and always will be.</div>
+
+      <div class="faq-question" onclick="toggleFaq(1)">How are points calculated?</div>
+      <div class="faq-answer">You earn 0.25 points for each successfully typed paragraph. Points will be used for leaderboard ranking and future rewards.</div>
+
+      <div class="faq-question" onclick="toggleFaq(2)">What happens if I make a mistake?</div>
+      <div class="faq-answer">The paragraph resets, and your accuracy score is affected. Try again to improve your muscle memory!</div>
+
+      <div class="faq-question" onclick="toggleFaq(3)">What is WPM and why is it important?</div>
+      <div class="faq-answer">WPM stands for Words Per Minute — a standard measure of typing speed. Higher WPM helps in school, work, coding, and gaming.</div>
+
+      <div class="faq-question" onclick="toggleFaq(4)">Can I see a leaderboard?</div>
+      <div class="faq-answer">Yes! Once you're logged in, your scores are saved and compared against others in real time.</div>
+
+      <div class="faq-question" onclick="toggleFaq(5)">Can I play on mobile?</div>
+      <div class="faq-answer">Typing Me is best played on desktop or laptop with a physical keyboard. A mobile-friendly version is coming soon.</div>
+    </div>
+
+    <div class="youtube-video">
+      <h2>Watch It in Action</h2>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    function toggleFaq(index) {
+      const answers = document.querySelectorAll('.faq-answer');
+      answers[index].style.display = answers[index].style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>

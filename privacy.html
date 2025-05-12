@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy - Type Me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    .policy-container {
+      background-color: rgba(0, 0, 0, 0.75);
+      border: 2px solid #00ffe5;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 30px #00ffe599;
+      max-width: 1000px;
+      margin: auto;
+      animation: zoomIn 0.6s ease-in-out;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1, h2 {
+      color: #00ffe5;
+      text-align: center;
+      text-shadow: 0 0 10px #00ffe5;
+    }
+
+    .faq-item {
+      background: #1c1c2e;
+      margin: 15px 0;
+      border-radius: 10px;
+      border: 1px solid #00ffe5;
+      cursor: pointer;
+    }
+
+    .faq-question {
+      padding: 15px 20px;
+      font-size: 18px;
+      color: #00ffe5;
+      text-shadow: 0 0 6px #00ffe5;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 15px 20px;
+      font-size: 16px;
+      line-height: 1.8;
+      background-color: #101020;
+      border-top: 1px solid #00ffe5;
+    }
+
+    footer {
+      text-align: center;
+      color: #aaa;
+      margin-top: 50px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="policy-container">
+    <h1>Privacy Policy</h1>
+    <p style="text-align:center; margin-bottom: 20px;">Last updated: May 10, 2025</p>
+
+    <!-- FAQ 1 -->
+    <div class="faq-item" onclick="toggleAnswer(this)">
+      <div class="faq-question">1. What information do we collect from users?</div>
+      <div class="faq-answer">
+        We collect information to improve your experience on the "Type Me" platform. Here's how:
+        <br><br>
+        <strong>Step 1:</strong> When you use our website, we may collect your name, email, phone number, and feedback via forms.<br>
+        <strong>Step 2:</strong> We track typing performance (WPM, accuracy) to personalize your experience.<br>
+        <strong>Step 3:</strong> Location data is optionally used (e.g., for map features) but is not stored unless needed.<br>
+        <strong>Step 4:</strong> All feedback submitted is saved in Firestore under the <code>contactrequest</code> collection.
+      </div>
+    </div>
+
+    <!-- FAQ 2 -->
+    <div class="faq-item" onclick="toggleAnswer(this)">
+      <div class="faq-question">2. Why do we collect your personal data?</div>
+      <div class="faq-answer">
+        Our goal is to deliver a better, smarter experience. We use your data to:
+        <br><br>
+        <strong>Step 1:</strong> Personalize your typing game performance and track progress.<br>
+        <strong>Step 2:</strong> Communicate with you if you request support.<br>
+        <strong>Step 3:</strong> Improve the game based on your feedback and behavior.<br>
+        <strong>Step 4:</strong> Ensure security and prevent misuse or spam.
+      </div>
+    </div>
+
+    <!-- FAQ 3 -->
+    <div class="faq-item" onclick="toggleAnswer(this)">
+      <div class="faq-question">3. How do we store and protect your information?</div>
+      <div class="faq-answer">
+        We use secure tools and services provided by Firebase:
+        <br><br>
+        <strong>Step 1:</strong> Your data is encrypted and stored in Firebase Firestore.<br>
+        <strong>Step 2:</strong> Access to data is restricted to authorized administrators only.<br>
+        <strong>Step 3:</strong> Regular security reviews are performed to maintain safety.<br>
+        <strong>Step 4:</strong> We follow best practices for encryption, secure access, and backups.
+      </div>
+    </div>
+
+    <!-- FAQ 4 -->
+    <div class="faq-item" onclick="toggleAnswer(this)">
+      <div class="faq-question">4. Do we share your data with third parties?</div>
+      <div class="faq-answer">
+        No, we do not share your identifiable data with any third party.
+        <br><br>
+        <strong>Step 1:</strong> We do not sell, rent, or trade your data.<br>
+        <strong>Step 2:</strong> We only use trusted services (like Firebase Analytics) to understand usage.<br>
+        <strong>Step 3:</strong> If ever required by law, we may comply with legal obligations.<br>
+        <strong>Step 4:</strong> Your data stays in our system, not with advertisers or marketers.
+      </div>
+    </div>
+
+    <!-- FAQ 5 -->
+    <div class="faq-item" onclick="toggleAnswer(this)">
+      <div class="faq-question">5. Do we use cookies or tracking tools?</div>
+      <div class="faq-answer">
+        Yes, but only limited tracking is used:
+        <br><br>
+        <strong>Step 1:</strong> We use Firebase Analytics to measure user engagement.<br>
+        <strong>Step 2:</strong> No personal information is stored in cookies.<br>
+        <strong>Step 3:</strong> These tools help us fix bugs and improve performance.<br>
+        <strong>Step 4:</strong> You can disable tracking tools in your browser settings if desired.
+      </div>
+    </div>
+
+    <!-- FAQ 6 -->
+    <div class="faq-item" onclick="toggleAnswer(this)">
+      <div class="faq-question">6. How can users delete their data?</div>
+      <div class="faq-answer">
+        You have the full right to request data deletion:
+        <br><br>
+        <strong>Step 1:</strong> Email us at <strong>typeme1451@gmail.com</strong> with your request.<br>
+        <strong>Step 2:</strong> Include your name and the email used in our system.<br>
+        <strong>Step 3:</strong> Our team will verify your identity for safety.<br>
+        <strong>Step 4:</strong> Your data will be permanently deleted from Firebase within 7 business days.
+      </div>
+    </div>
+
+    <!-- FAQ 7 -->
+    <div class="faq-item" onclick="toggleAnswer(this)">
+      <div class="faq-question">7. How does feedback submission work?</div>
+      <div class="faq-answer">
+        We store your feedback securely to improve your experience:
+        <br><br>
+        <strong>Step 1:</strong> Fill out the feedback/contact form with your name, email, number, and message.<br>
+        <strong>Step 2:</strong> This data is stored in the <code>contactrequest</code> Firestore collection.<br>
+        <strong>Step 3:</strong> We review and respond to feedback as needed.<br>
+        <strong>Step 4:</strong> Feedback is not used for marketing or shared with third parties.
+      </div>
+    </div>
+
+    <!-- FAQ 8 -->
+    <div class="faq-item" onclick="toggleAnswer(this)">
+      <div class="faq-question">8. How are children’s data handled?</div>
+      <div class="faq-answer">
+        Protecting children’s privacy is important to us:
+        <br><br>
+        <strong>Step 1:</strong> We do not knowingly collect information from users under 13.<br>
+        <strong>Step 2:</strong> If such data is found, it is deleted immediately.<br>
+        <strong>Step 3:</strong> Parents/guardians can request deletion at <strong>typeme1451@gmail.com</strong>.<br>
+        <strong>Step 4:</strong> We comply with child data protection laws.
+      </div>
+    </div>
+
+    <!-- FAQ 9 -->
+    <div class="faq-item" onclick="toggleAnswer(this)">
+      <div class="faq-question">9. What rights do users have over their data?</div>
+      <div class="faq-answer">
+        You are in control of your data. You can:
+        <br><br>
+        <strong>Step 1:</strong> Request access to your data anytime.<br>
+        <strong>Step 2:</strong> Ask for corrections or updates.<br>
+        <strong>Step 3:</strong> Request deletion (data will be removed within 7 days).<br>
+        <strong>Step 4:</strong> Withdraw consent for processing by contacting us at <strong>typeme1451@gmail.com</strong>.
+      </div>
+    </div>
+
+    <!-- FAQ 10 -->
+    <div class="faq-item" onclick="toggleAnswer(this)">
+      <div class="faq-question">10. How will users be informed about policy changes?</div>
+      <div class="faq-answer">
+        We will keep you updated on any changes:
+        <br><br>
+        <strong>Step 1:</strong> This page will always reflect the latest policy with the updated date.<br>
+        <strong>Step 2:</strong> Major changes will be notified via email (if available) or in-app.<br>
+        <strong>Step 3:</strong> You should periodically review this page.<br>
+        <strong>Step 4:</strong> Contact us at <strong>typeme1451@gmail.com</strong> for clarification.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Type Me. All rights reserved.
+  </footer>
+
+  <script>
+    function toggleAnswer(element) {
+      const answer = element.querySelector('.faq-answer');
+      answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>

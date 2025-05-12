@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Type Me - Contact Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      padding: 30px;
+      overflow-x: hidden;
+    }
+    header { text-align: center; margin-bottom: 2rem; }
+    header h1 {
+      color: #00ffe5;
+      text-shadow: 0 0 10px #00ffe5;
+      font-size: 2.5rem;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    section {
+      background: rgba(0, 0, 0, 0.75);
+      border: 2px solid #00ffe5;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 20px #00ffe599;
+    }
+    h2 {
+      color: #00ffe5;
+      text-align: center;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 8px #00ffe5;
+    }
+    form input, form textarea, form button {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+      background: #1c1c2e;
+      color: #00ffe5;
+    }
+    form button {
+      background-color: #00ffe5;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    form button:hover { background-color: #00bfa5; }
+    .contact-info-section ul { list-style: none; padding: 0; }
+    .contact-info-section li { margin-bottom: 1rem; font-size: 1rem; }
+    .contact-info-section i { color: #00ffe5; margin-right: 0.5rem; }
+    .social-icons a {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      color: #00ffe5;
+      text-decoration: none;
+    }
+    .social-icons a:hover { color: #00bfa5; }
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffe599;
+    }
+    .faqs {
+      max-width: 900px;
+      margin: 3rem auto;
+    }
+    .faq-item {
+      background: #1c1c2e;
+      border: 1px solid #00ffe5;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      padding: 1rem;
+    }
+    .faq-question {
+      background: none;
+      border: none;
+      color: #00ffe5;
+      font-size: 1.2rem;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+    }
+    .faq-answer {
+      display: none;
+      margin-top: 0.8rem;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #aaa;
+    }
+    .fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00ffe5;
+      color: #000;
+      padding: 10px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Contact Us</h1>
+    <p>Reach out to Type Me for feedback, support or suggestions.</p>
+  </header>
+
+  <main class="container">
+    <section class="contact-form-section">
+      <h2>Send a Message</h2>
+      <form id="contact-form">
+        <input type="text" id="contact-name" placeholder="Your Name" required />
+        <input type="email" id="contact-email" placeholder="Your Email" required />
+        <input type="tel" id="contact-phone" placeholder="Your Phone (Optional)" />
+        <textarea id="contact-message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <section class="contact-info-section">
+      <h2>Contact Info</h2>
+      <ul>
+        <li><i class="fas fa-phone"></i> +91 9542327830</li>
+        <li><i class="fas fa-envelope"></i> typeme1451@gmail.com</li>
+        <li><i class="fas fa-map-marker-alt"></i> HITEC city, Hyderabad, India</li>
+      </ul>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </section>
+
+    <section class="map-section">
+      <h2>Our Location</h2>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14471.679056073883!2d78.35703530590912!3d17.447752402381514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb93dc8c5d69df%3A0x19688beb557fa0ee!2sHITEC%20City%2C%20Hyderabad%2C%20Telangana%20500081!5e1!3m2!1sen!2sin!4v1746956482177!5m2!1sen!2sin"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </section>
+  </main>
+
+  <section class="faqs">
+    <h2>FAQs</h2>
+    <div class="faq-item">
+      <button class="faq-question">How do I contact support?</button>
+      <div class="faq-answer"><p>You can email us at support@typeme.com or call us.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Where are you located?</button>
+      <div class="faq-answer"><p>We are located in Hyderabad, India.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">What is Type Me?</button>
+      <div class="faq-answer"><p>Type Me is a typing game platform that improves your speed and awards points!</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Type Me. All rights reserved.</p>
+  </footer>
+
+  <div class="fab" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+<script>
+  // Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyA9Gr2Qq5s_2fuMcf1u3P5O1bluhlBA_dw",
+    authDomain: "data-entry-84206.firebaseapp.com",
+    projectId: "data-entry-84206",
+    storageBucket: "data-entry-84206.appspot.com",
+    messagingSenderId: "132128501188",
+    appId: "1:132128501188:web:ce9aef42a658be7aef4891",
+    measurementId: "G-4ZPJGQP6K1"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // Form submission logic
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("contact-form");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("contact-name").value.trim();
+      const email = document.getElementById("contact-email").value.trim();
+      const phone = document.getElementById("contact-phone").value.trim();
+      const message = document.getElementById("contact-message").value.trim();
+
+      if (!name || !email || !message) {
+        alert("⚠️ Please fill in all required fields.");
+        return;
+      }
+
+      try {
+        await db.collection("contactrequest").add({
+          name,
+          email,
+          phone,
+          message,
+          timestamp: new Date()
+        });
+
+        alert("✅ Your feedback has been submitted successfully. Our provider will contact you soon. Thank you for your feedback!");
+        form.reset();
+      } catch (error) {
+        console.error("❌ Error submitting feedback:", error);
+        alert("❌ Something went wrong. Please try again later.");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

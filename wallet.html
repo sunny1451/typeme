@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Withdraw Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #000000, #1f1c2c);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .withdraw-container {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #00ffe5;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00ffe599;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    h1 {
+      color: #00ffe5;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #00ffe5;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: #2f3640;
+      color: #00ffe5;
+      font-size: 16px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px #00ffe555 inset;
+    }
+
+    button {
+      background-color: #00ffe5;
+      color: #000;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffe5;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00bfa6;
+      transform: scale(1.05);
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #00ffe5;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      color: #00ffe5;
+      text-decoration: none;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="withdraw-container">
+    <h1>Withdraw Points</h1>
+    <input type="number" id="withdrawAmount" placeholder="Enter amount to withdraw">
+    <input type="text" id="accountNumber" placeholder="Bank Account Number">
+    <input type="text" id="ifscCode" placeholder="IFSC Code">
+    <input type="text" id="accountName" placeholder="Account Name">
+    <input type="text" id="holderName" placeholder="Account Holder Name">
+    <button onclick="withdraw()">Withdraw</button>
+    <p class="message" id="message"></p>
+    <a href="../new.html">⬅ Back to Game</a>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+    import { getFirestore, doc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
+    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA9Gr2Qq5s_2fuMcf1u3P5O1bluhlBA_dw",
+      authDomain: "data-entry-84206.firebaseapp.com",
+      projectId: "data-entry-84206",
+      storageBucket: "data-entry-84206.appspot.com",
+      messagingSenderId: "132128501188",
+      appId: "1:132128501188:web:ce9aef42a658be7aef4891"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth();
+
+    let userEmail = null;
+
+    // Checking if the user is logged in
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userEmail = user.email;
+      } else {
+        alert("Please log in.");
+        window.location.href = "../login/login.html"; // Redirect if not logged in
+      }
+    });
+
+    // Function to process the withdrawal
+    async function withdraw() {
+      const amount = parseFloat(document.getElementById('withdrawAmount').value);
+      const accNumber = document.getElementById('accountNumber').value;
+      const ifscCode = document.getElementById('ifscCode').value;
+      const accName = document.getElementById('accountName').value;
+      const holderName = document.getElementById('holderName').value;
+      const message = document.getElementById('message');
+
+      // Validate user input
+      if (!amount || amount <= 0) {
+        message.textContent = '❌ Please enter a valid amount.';
+        return;
+      }
+
+      if (!userEmail) {
+        message.textContent = '❌ User not authenticated.';
+        return;
+      }
+
+      try {
+        const userRef = doc(db, 'wallets', userEmail); // Referring to the 'wallets' collection in Firestore
+        const docSnap = await getDoc(userRef);
+
+        // Check if the user has a wallet record
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const currentPoints = data.points || 0;
+
+          // Check if the user has enough points for the withdrawal
+          if (currentPoints >= amount) {
+            // Update the user's wallet document
+            await updateDoc(userRef, {
+              points: currentPoints - amount, // Deduct the withdrawal amount
+              lastWithdrawAmount: amount,
+              accountNumber: accNumber,
+              ifscCode: ifscCode,
+              accountName: accName,
+              accountHolderName: holderName,
+              withdrawTime: new Date().toISOString()
+            });
+
+            message.textContent = `✅ Withdraw of ₹${amount} requested successfully. Remaining balance: ₹${currentPoints - amount}.`;
+          } else {
+            message.textContent = `❌ Insufficient balance. You have ₹${currentPoints} remaining.`;
+          }
+        } else {
+          message.textContent = "❌ Wallet not found.";
+        }
+      } catch (error) {
+        console.error(error);
+        message.textContent = "❌ Error occurred during withdrawal.";
+      }
+    }
+
+    // Attach withdraw function to the window object to make it accessible globally
+    window.withdraw = withdraw;
+  </script>
+</body>
+</html>
